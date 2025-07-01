@@ -16,8 +16,7 @@ wcapi = API(
 )
 
 def start(update: Update, context: CallbackContext):
-    update.message.reply_text("به فروشگاه کارکیتس خوش آمدید.
-    لطفا نام قطعه را وارد کنید. 
+    update.message.reply_text("به فروشگاه کارکیتس خوش آمدید.لطفا نام قطعه را وارد کنید. 
     در صورت عدم پیدا شدن قطعه با پشتیبان تماس بگیرید.")
 
 def search_product(name):
