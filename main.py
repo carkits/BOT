@@ -16,8 +16,9 @@ wcapi = API(
 )
 
 def start(update: Update, context: CallbackContext):
-    update.message.reply_text("سلام! 👋 به ربات استعلام قیمت C.K.S خوش اومدی.
-لطفا نام یا کد قطعه مورد نظر رو بنویس.")
+    update.message.reply_text("به فروشگاه کارکیتس خوش آمدید.
+    لطفا نام قطعه را وارد کنید. 
+    در صورت عدم پیدا شدن قطعه با پشتیبان تماس بگیرید.")
 
 def search_product(name):
     res = wcapi.get("products", params={"search": name})
