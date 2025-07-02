@@ -1,11 +1,15 @@
 import os
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext
 from woocommerce import API
 
-WC_URL = os.getenv("WOOCOMMERCE_URL")
-WC_KEY = os.getenv("WOOCOMMERCE_CONSUMER_KEY")
-WC_SECRET = os.getenv("WOOCOMMERCE_CONSUMER_SECRET")
+# بارگذاری متغیرهای محیطی
+load_dotenv()
+
+WC_URL = os.getenv("WOOCOMMERCE_URL", "https://carkits.ir")
+WC_KEY = os.getenv("WOOCOMMERCE_CONSUMER_KEY", "")
+WC_SECRET = os.getenv("WOOCOMMERCE_CONSUMER_SECRET", "")
 SUPPORT_USERNAME = os.getenv("SUPPORT_USERNAME", "cks67")
 
 wcapi = API(
@@ -41,7 +45,7 @@ def handle_message(update: Update, context: CallbackContext):
         keyboard = [[InlineKeyboardButton("🧑‍💼 سفارش قطعه از پشتیبان", url=f"https://t.me/{SUPPORT_USERNAME}")]]
         update.message.reply_text("متأسفم، قطعه‌ای با این مشخصات پیدا نشد.", reply_markup=InlineKeyboardMarkup(keyboard))
 
-app = ApplicationBuilder().token(os.getenv("TELEGRAM_TOKEN")).build()
+app = ApplicationBuilder().token(os.getenv("TELEGRAM_TOKEN", "")).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
